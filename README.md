@@ -10,7 +10,8 @@ Københavns Drengekor singing from the balcony.
 - `music.js` – "Glade jul" / "Silent Night" (Gruber, 1818, public domain), synthesised
   with the Web Audio API. Put a recording you hold a licence for at `audio/music.mp3`
   and it is played instead.
-- `img/` – the reference photos, resized for the web
+- The reference photos (resized for the web) are served from a public Cloudflare R2 bucket,
+  `dangleterre-juleillumination`, under `photos/`; `photos.js` holds the address
 
 Run locally with `python3 -m http.server --directory .` and open the printed address.
 Add `?t=30` to the address to start just before the lights come on, or `?t=50&hold` for a still.

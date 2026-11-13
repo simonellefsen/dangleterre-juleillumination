@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 import { Music } from './music.js';
 
+// The photos live in a public Cloudflare R2 bucket (CORS open for GET), not in this repo.
+const PHOTO_BASE = 'https://pub-888e7ecbaa5849e7894c0a6a5e4e3891.r2.dev/photos';
 const FILES = ['0822', '0824', '0826', '0827', '0829', '0831', '0833', '0834',
-  '0835', '0836', '0837', '0838', '0839', '0840', '0841', '0842'].map((n) => `img/IMG_${n}.jpg`);
+  '0835', '0836', '0837', '0838', '0839', '0840', '0841', '0842'].map((n) => `${PHOTO_BASE}/IMG_${n}.jpg`);
 
 // Caption per shot (index of the first shot it applies to).
 const CAPTIONS = [
@@ -304,6 +306,7 @@ const music = new Music();
 function loadImage(src) {
   return new Promise((res, rej) => {
     const im = new Image();
+    im.crossOrigin = 'anonymous'; // needed to use another site's image as a WebGL texture
     im.onload = () => res(im); im.onerror = () => rej(new Error(`Kunne ikke hente ${src}`));
     im.src = src;
   });
